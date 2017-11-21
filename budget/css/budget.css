@@ -1,0 +1,61 @@
+html,body{}
+
+page{}
+
+/* s-d */
+
+#preloader {
+    position: fixed;
+    /*display:none;*/
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e4e7ea;
+    z-index: 10000;
+}
+
+#status {
+    width: 1.5rem;
+    height: 1.5rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -0.75rem 0 0 -0.75rem;
+    font-size: 3.6rem;
+    color: #757575;
+}
+
+.ys-loading {
+    /*display: none;*/
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /*background-color: transparent;*/
+    background-color: rgba(255, 255, 255, .6);
+    z-index: 3999;
+}
+
+.ys-loading>.loading-wrapper {
+    width: 180px;
+    height: 120px;
+    padding-top: 80px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -90px;
+    margin-top: -80px;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.ys-loading>.loading-wrapper>.loading-ani {
+    width: 74px;
+    height: 72px;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    margin-left: -37px;
+}

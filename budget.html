@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>宝龙成本系统</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <title>Title</title>
+
+    <link rel="stylesheet" href="dist/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="dist/css/swiper.css"/>
+    <link rel="stylesheet" href="budget/css/static_table.css">
+
+    <script src="dist/js/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="dist/bootstrap/js/bootstrap.min.js"></script>
+    <script src="dist/js/angular/angular.min.js"></script>
+    <script src="dist/js/swiper.jquery.js"></script>
+    <script src="dist/js/jquery.pin.js"></script>
+
+    <script src="budget/js/budget.directive.js"></script>
+    <script src="budget/js/budget.filters.js"></script>
+    <script src="budget/js/budget.app.js"></script>
+    <script src="budget/js/budget.controller.js"></script>
+</head>
+<body ng-app="app" ng-controller="budgetCtrl as bCtrl">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+
+    <div class="page"  >
+        <div class="block">
+            <div class="block-title">
+                <div class="pull-right btn-wrapper">
+                    <a class="btn btn-default ys-btn" ng-click="bCtrl.edit($event)" ng-show="!bCtrl.editMod">编辑</a>
+                    <a class="btn btn-default ys-btn" ng-click="bCtrl.cancel($event)" ng-show="bCtrl.editMod">取消</a>
+                    <a class="btn btn-default ys-btn ys-btn-red" ng-click="bCtrl.save($event)" ng-show="bCtrl.editMod">保存</a>
+                </div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="ys-section ys-section-table-wrapper">
+                <div class="ys-table-wrapper-swiper" ys-left-top-fixed-table="">
+                    <!-- ys-table-fixed-top -->
+                    <div class="ys-table-fixed-top" style="padding-left:350px;background-color:#f3f4f8;">
+                        <div class="ys-table-static ys-table-static-left" style="width:350px;">
+                            <table class="table table-no-bordered ys-table" style="width:100%;">
+                                <thead>
+                                <tr>
+                                    <th>铺位号</th>
+                                    <th>商铺类型</th>
+                                    <th>规划业态</th>
+                                </tr>
+                                <tr>
+                                    <th>合计</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                        <div class="swiper-container" style="width:100%;" id="noi-main-table-head">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide" style="min-height: 72px;">
+                                    <table class="table table-no-bordered amp-table table-hover table-header-fixed" style="width:1600px;" >
+                                        <thead>
+                                        <tr>
+                                            <th ng-repeat="month in bCtrl.monthArr track by $index">{{month}}</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right" ng-repeat="sum in bCtrl.sumData track by $index"><span>{{sum|default:0|number:2}}</span></td>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div><!--swiper-slide-->
+                            </div><!--swiper-wrapper-->
+                        </div><!--swiper container-->
+                    </div>
+                    <!--end ys-table-fixed-top -->
+                    <!--ys-table-main-->
+                    <div class="ys-table-main" style="padding-left:350px;">
+                        <!--ys-table-static-left-->
+                        <div class="ys-table-static ys-table-static-left" style="width:350px;">
+                            <table class="table table-no-bordered ys-table" style="width:100%;">
+                                <tbody>
+                                <tr ng-repeat="shop in bCtrl.tableData track by $index">
+                                    <th>{{shop.shop}}</th>
+                                    <th>{{shop.type}}</th>
+                                    <th>{{shop.form}}</th>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div><!--end ys-table-static-left-->
+
+                        <!--swiper-container-->
+                        <div class="swiper-container" style="width:100%;" >
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div style="width:1600px;">
+                                        <table class="table table-no-bordered amp-table table-hover table-header-fixed" style="width:100%" >
+                                            <tbody>
+                                            <tr ng-repeat="shop in bCtrl.tableData track by $index">
+                                                <td ng-repeat="monthData in shop.data">
+                                                    <div class="cell-edit-wrapper clearfix" ng-show="bCtrl.editMod==true">
+                                                        <div class="dropdown cell-left" menu-dropdown ng-model="monthData.budgetType" item-select="bCtrl.setBidMode(item)">
+                                                            <button class="ys-text-btn dropdown-toggle" type="button" data-toggle="dropdown">
+                                                                {{bCtrl.dropdownMenu.budgetMod[monthData.budgetType]|default:"请选择"}}
+                                                                <span class="caret"></span>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li ng-repeat="(btMod,name) in bCtrl.dropdownMenu.budgetMod track by $index" ng-class="{active:(btMod==bCtrl.budgetType)}">
+                                                                    <a data-item="{{btMod}}">{{name}}</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="cell-right ys-input-wrapper num-input" >
+                                                            <input type="text" placeholder="/" data-date="" value="" ng-model="monthData.value" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="cell-wrapper clearfix" ng-show="bCtrl.editMod==false">
+                                                        <span class="cell-left">{{bCtrl.dropdownMenu.budgetMod[monthData.budgetType]|default:"-"}}</span>
+                                                        <span class="cell-right text-right">{{monthData.value|number:2}}</span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div><!--swiper-slide-->
+                            </div><!--swiper-wrapper-->
+                            <!-- Add Scroll Bar -->
+                            <div class="swiper-scrollbar"></div>
+                        </div><!--swiper container-->
+
+                    </div><!--end ys-table-main-->
+                </div><!--end amp-table-wrapper-swiper-->
+
+            </div><!--ys-section-->
+        </div>
+    </div><!--page-->
+    <div class="ys-loading" ng-show="bCtrl.loadingShow">
+        <div class="loading-wrapper">
+            <div class="loading-ani">
+                <!--<img src="../static/images/main/loading.gif">-->
+                <h3>加载中...</h3>
+            </div>
+            <!-- <span>处理中...</span>-->
+        </div>
+    </div><!-- ys loading -->
+
+</body>
+</html>
