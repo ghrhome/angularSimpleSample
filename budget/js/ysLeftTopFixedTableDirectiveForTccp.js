@@ -78,9 +78,9 @@ define(["angular","./app.directives","jquery","swiper"],function(angular,directi
                     });
 
                     //update by zhanghongen 17-11-10
-                    $(window).resize(function(){
+                   /* $(window).resize(function(){
                         $top.width($(mainTable.parentNode).width());
-                    })
+                    })*/
 
                 }//end link
             };

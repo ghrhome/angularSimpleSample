@@ -66,7 +66,7 @@ directives.directive('ysLeftTopFixedTable', ["$timeout",
                     $(".table").find("input").attr("tabIndex","-1");
 
                     //update by cheng
-                    var defer=null;
+                   /* var defer=null;
                     function _swiperUpdate(){
                         $top.width($(mainTable.parentNode).width());
                         pin.refresh();
@@ -87,7 +87,7 @@ directives.directive('ysLeftTopFixedTable', ["$timeout",
                         }
 
                     });
-
+                    */
                 });
 
                 $scope.$on("$destroy", function() {
@@ -104,9 +104,9 @@ directives.directive('ysLeftTopFixedTable', ["$timeout",
 
 
                 //update 17-11-10
-              /*  $(window).resize(function(){
+                $(window).resize(function(){
                     $top.width($(mainTable.parentNode).width());
-                })*/
+                })
 
             }//end link
         };
