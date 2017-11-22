@@ -14,7 +14,7 @@ app.controller("budgetCtrl",["$rootScope","$scope","$timeout","dataPreloadServic
         }
 
         self.tableData_ori=[];
-
+        self.bcList=[];
 
         //modified data;
         //self.sumData=[];
@@ -44,14 +44,17 @@ app.controller("budgetCtrl",["$rootScope","$scope","$timeout","dataPreloadServic
             self.modifiedData.data={};
             self.editMod=false;
         };
-        self.save=function($event){
-            $event.preventDefault();
-            //ajax here
 
-            //成功回调
+        function _saveCB(){
             self.tableData_ori=angular.copy(self.tableData);
             self.modifiedData.data={};
             self.editMod=false;
+        }
+        self.save=function($event){
+            $event.preventDefault();
+            //ajax here
+            dataSaveService.saveData("test.html",self.modifiedData,_saveCB,"json");
+            //成功回调
         };
 
 
@@ -84,6 +87,7 @@ app.controller("budgetCtrl",["$rootScope","$scope","$timeout","dataPreloadServic
         function _init(data){
             console.log(data);
 
+            self.bcList=angular.copy(data.bcList);
             self.dropdownMenu.budgetMod=angular.copy(data.menuData.budgetTypes);
             //self.sumData=angular.copy(data.sum);
             self.tableData=angular.copy(data.tableData);
@@ -96,7 +100,7 @@ app.controller("budgetCtrl",["$rootScope","$scope","$timeout","dataPreloadServic
 
             $("#preloader").fadeOut(300);
         }
-        dataPreloadService.getData("",_init);
+        dataPreloadService.getData("./budget/data/initdata.json","",_init);
 
         /*loading part*/
         self.loadingShow=false;

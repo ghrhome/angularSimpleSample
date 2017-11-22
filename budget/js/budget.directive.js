@@ -48,7 +48,7 @@ directives.directive('ysLeftTopFixedTable', ["$timeout",
 
                     $top.pin({
                         containerSelector: container,
-                        padding: {top: 60, bottom: 50}
+                        padding: {top: 0, bottom: 50}
                     });
                 }
 

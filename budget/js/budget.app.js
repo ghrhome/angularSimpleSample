@@ -5,11 +5,11 @@ var app=angular.module("app",["app.directives","app.filters"]);
 
 app.service("dataMenuService",["$rootScope","$http",function($rootScope,$http) {
     var service = {
-        getData: function (search,cb) {
+        getData: function (url,search,cb) {
             if(typeof search==="undefined"){
                 search="";
             }
-            return $http.get("menu_list.json", {cache: false,'Content-Type':'application/x-www-form-urlencoded',withCredentials:true}).then(function (res) {
+            return $http.get(url+"?search="+search, {cache: false,'Content-Type':'application/x-www-form-urlencoded',withCredentials:true}).then(function (res) {
                 if(typeof cb!=="undefined"){
                     cb(res.data);
                 }else{
@@ -26,12 +26,12 @@ app.service("dataMenuService",["$rootScope","$http",function($rootScope,$http) {
 
 app.service("dataPreloadService",["$rootScope","$http",function($rootScope,$http) {
     var service = {
-        getData: function (search,cb) {
+        getData: function (url,search,cb) {
             if(typeof search==="undefined"){
                 search="";
             }
             //todo:把dataPreloadService作为一个通用的api 根据search的传参，后台返回页面渲染数据，实现页面的预加载
-            return $http.get("./budget/data/initdata.json?search="+search, {cache: false,'Content-Type':'application/x-www-form-urlencoded',withCredentials:true}).then(function (res) {
+            return $http.get(url+"?search="+search, {cache: false,'Content-Type':'application/x-www-form-urlencoded',withCredentials:true}).then(function (res) {
                 if(typeof cb!=="undefined"){
                     cb(res.data);
                 }else{
@@ -70,6 +70,8 @@ app.service("dataSaveService",["$rootScope","$http",function($rootScope,$http) {
 
             },function(err){
                 // location.href=$rootScope.plink;
+                alert("网络错误，请稍后再试");
+                $rootScope.loading_hide();
                 console.log(err)
             });
         }

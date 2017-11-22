@@ -31,10 +31,17 @@
     </div>
 
     <div class="page"  >
+        <div class="page-header">
+            <ul class="ys-breadcrumb clearfix pull-left">
+                <li class="ys-breadcrumb-header"><a href="javascript:history.back(-1)">返回</a></li>
+                <li ng-repeat="breadcrumb in bCtrl.bcList"><a href="javascript:void(0)">{{breadcrumb}}</a></li>
+
+            </ul>
+        </div>
         <div class="block">
             <div class="block-title clearfix">
                 <div class="pull-right btn-wrapper">
-                    <a class="btn btn-default ys-btn" ng-click="bCtrl.edit($event)" ng-show="!bCtrl.editMod">编辑</a>
+                    <a class="btn btn-default ys-btn ys-btn-red" ng-click="bCtrl.edit($event)" ng-show="!bCtrl.editMod">编辑</a>
                     <a class="btn btn-default ys-btn" ng-click="bCtrl.cancel($event)" ng-show="bCtrl.editMod">取消</a>
                     <a class="btn btn-default ys-btn ys-btn-red" ng-click="bCtrl.save($event)" ng-show="bCtrl.editMod">保存</a>
                 </div>
@@ -151,8 +158,8 @@
     <div class="ys-loading" ng-show="bCtrl.loadingShow">
         <div class="loading-wrapper">
             <div class="loading-ani">
-                <!--<img src="../static/images/main/loading.gif">-->
-                <h3>加载中...</h3>
+                <img src="./budget/images/loading.gif">
+              <!--  <h3>加载中...</h3>-->
             </div>
             <!-- <span>处理中...</span>-->
         </div>

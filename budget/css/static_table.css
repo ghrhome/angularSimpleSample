@@ -37,7 +37,7 @@ table.ys-table thead {
     border-bottom:0;
     font-weight:normal;
     border-bottom: 1px solid #d9dde0 ;*/
-    padding:8px 15px;
+    padding:8px;
 }
 
 .ys-table>thead>tr>th.text-left{text-align: left;}
