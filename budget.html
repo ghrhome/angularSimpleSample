@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="dist/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="dist/css/swiper.css"/>
     <link rel="stylesheet" href="budget/css/static_table.css">
+    <link rel="stylesheet" href="budget/css/budget.css">
 
     <script src="dist/js/jQuery/jquery-2.2.3.min.js"></script>
     <script src="dist/bootstrap/js/bootstrap.min.js"></script>
@@ -31,7 +32,7 @@
 
     <div class="page"  >
         <div class="block">
-            <div class="block-title">
+            <div class="block-title clearfix">
                 <div class="pull-right btn-wrapper">
                     <a class="btn btn-default ys-btn" ng-click="bCtrl.edit($event)" ng-show="!bCtrl.editMod">编辑</a>
                     <a class="btn btn-default ys-btn" ng-click="bCtrl.cancel($event)" ng-show="bCtrl.editMod">取消</a>
@@ -43,14 +44,14 @@
             <div class="ys-section ys-section-table-wrapper">
                 <div class="ys-table-wrapper-swiper" ys-left-top-fixed-table="">
                     <!-- ys-table-fixed-top -->
-                    <div class="ys-table-fixed-top" style="padding-left:350px;background-color:#f3f4f8;">
+                    <div class="ys-table-fixed-top" style="padding-left:350px;">
                         <div class="ys-table-static ys-table-static-left" style="width:350px;">
                             <table class="table table-no-bordered ys-table" style="width:100%;">
                                 <thead>
                                 <tr>
-                                    <th>铺位号</th>
-                                    <th>商铺类型</th>
-                                    <th>规划业态</th>
+                                    <th class="text-center">铺位号</th>
+                                    <th class="text-center">商铺类型</th>
+                                    <th class="text-center">规划业态</th>
                                 </tr>
                                 <tr>
                                     <th>合计</th>
@@ -63,11 +64,14 @@
 
                         <div class="swiper-container" style="width:100%;" id="noi-main-table-head">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide" style="min-height: 72px;">
-                                    <table class="table table-no-bordered amp-table table-hover table-header-fixed" style="width:1600px;" >
+                                <div class="swiper-slide" style="min-height: 78px;">
+                                    <table class="table table-no-bordered ys-table table-hover table-header-fixed" style="width:2233px;" >
+                                        <colgroup>
+                                            <col ng-repeat="month in bCtrl.monthArr" width="186px">
+                                        </colgroup>
                                         <thead>
                                         <tr>
-                                            <th ng-repeat="month in bCtrl.monthArr track by $index">{{month}}</th>
+                                            <th ng-repeat="month in bCtrl.monthArr track by $index" class="text-center">{{month}}</th>
                                         </tr>
                                         <tr>
                                             <td class="text-right" ng-repeat="sum in bCtrl.sumData track by $index"><span>{{sum|default:0|number:2}}</span></td>
@@ -86,31 +90,34 @@
                             <table class="table table-no-bordered ys-table" style="width:100%;">
                                 <tbody>
                                 <tr ng-repeat="shop in bCtrl.tableData track by $index">
-                                    <th>{{shop.shop}}</th>
-                                    <th>{{shop.type}}</th>
-                                    <th>{{shop.form}}</th>
+                                    <th><span>{{shop.shop}}</span></th>
+                                    <th class="text-center"><span>{{shop.type}}</span></th>
+                                    <th class="text-center"><span>{{shop.form}}</span></th>
                                 </tr>
                                 </tbody>
                             </table>
                         </div><!--end ys-table-static-left-->
 
                         <!--swiper-container-->
-                        <div class="swiper-container" style="width:100%;" >
+                        <div class="swiper-container" style="width:100%;padding-bottom:50px;" >
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-                                    <div style="width:1600px;">
-                                        <table class="table table-no-bordered amp-table table-hover table-header-fixed" style="width:100%" >
+                                    <div style="width:2233px;">
+                                        <table class="table table-no-bordered ys-table table-hover table-header-fixed"  >
+                                            <colgroup>
+                                                <col ng-repeat="month in bCtrl.monthArr" width="186px">
+                                            </colgroup>
                                             <tbody>
                                             <tr ng-repeat="shop in bCtrl.tableData track by $index">
                                                 <td ng-repeat="monthData in shop.data">
-                                                    <div class="cell-edit-wrapper clearfix" ng-show="bCtrl.editMod==true">
+                                                    <div class="cell-wrapper cell-edit-wrapper clearfix" ng-show="bCtrl.editMod==true">
                                                         <div class="dropdown cell-left" menu-dropdown ng-model="monthData.budgetType" item-select="bCtrl.setBidMode(item)">
                                                             <button class="ys-text-btn dropdown-toggle" type="button" data-toggle="dropdown">
                                                                 {{bCtrl.dropdownMenu.budgetMod[monthData.budgetType]|default:"请选择"}}
                                                                 <span class="caret"></span>
                                                             </button>
                                                             <ul class="dropdown-menu">
-                                                                <li ng-repeat="(btMod,name) in bCtrl.dropdownMenu.budgetMod track by $index" ng-class="{active:(btMod==bCtrl.budgetType)}">
+                                                                <li ng-repeat="(btMod,name) in bCtrl.dropdownMenu.budgetMod track by $index" ng-class="{active:(btMod==monthData.budgetType)}">
                                                                     <a data-item="{{btMod}}">{{name}}</a>
                                                                 </li>
                                                             </ul>

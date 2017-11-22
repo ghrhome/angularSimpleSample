@@ -13,7 +13,7 @@ app.controller("budgetCtrl",["$rootScope","$scope","$timeout","dataPreloadServic
             "budgetMod":{}
         }
 
-        self.budgetType="";
+        self.tableData_ori=[];
 
 
         //modified data;
@@ -38,10 +38,13 @@ app.controller("budgetCtrl",["$rootScope","$scope","$timeout","dataPreloadServic
 
         self.cancel=function($event){
             $event.preventDefault();
+            self.tableData=angular.copy(self.tableData_ori);
             self.editMod=false;
+
         };
         self.save=function($event){
             $event.preventDefault();
+            self.tableData_ori=angular.copy(self.tableData);
             self.editMod=false;
         };
 
@@ -53,8 +56,10 @@ app.controller("budgetCtrl",["$rootScope","$scope","$timeout","dataPreloadServic
             self.dropdownMenu.budgetMod=angular.copy(data.menuData.budgetTypes);
             self.sumData=angular.copy(data.sum);
             self.tableData=angular.copy(data.tableData)
-
+            self.tableData_ori=angular.copy(data.tableData)
             $rootScope.$broadcast("initSwiper");
+
+            $("#preloader").fadeOut(300);
         }
         dataPreloadService.getData("",_init);
 

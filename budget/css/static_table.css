@@ -18,8 +18,10 @@ table.ys-table thead {
 .table-no-bordered thead{background-color:transparent;}
 */
 
-.ys-table tr>th, .ys-table tr>td {
-    height: 36px;
+.ys-table thead>tr>th, .ys-table thead>tr>td,
+.ys-table tbody>tr>th, .ys-table tbody>tr>td{
+    height: 39px;
+    line-height:22px;
     overflow: hidden;
     vertical-align: middle;
 }
@@ -47,7 +49,7 @@ table.ys-table thead {
 
 .ys-table>tbody>tr>th,.ys-table>tbody>tr>td,
 .ys-table>tfoot>tr>th,.ys-table>tfoot>tr>td{
-    padding:6px 15px;height:36px;line-height:24px;vertical-align: middle;font-size: 14px;color:#373c42;font-weight:normal;border-bottom:solid 1px #f3f4f8;}
+    padding:8px;height:39px;line-height:22px;vertical-align: middle;font-size: 14px;color:#373c42;font-weight:normal;border-bottom:solid 1px #f3f4f8;}
 
 .table-no-bordered>tbody>tr>th, .table-no-bordered>tbody>tr>td,
 .ys-table-wrapper-swiper .table-no-bordered tr>th, .ys-table-wrapper-swiper .table-no-bordered tr>td {
