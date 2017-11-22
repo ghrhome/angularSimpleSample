@@ -23,11 +23,13 @@ app.controller("budgetCtrl",["$rootScope","$scope","$timeout","dataPreloadServic
         self.modifiedData={
             project:"",
             year:"", //location.href中取
-            data:[]
+            data:{}
         }
 
-        self.setBidMode=function(item){
-            console.log(item);
+        self.setBidMode=function(monthData,$index){
+            console.log(monthData);
+            console.log($index);
+            self.setModified(monthData,$index);
         }
 
         self.edit=function($event){
@@ -39,7 +41,7 @@ app.controller("budgetCtrl",["$rootScope","$scope","$timeout","dataPreloadServic
         self.cancel=function($event){
             $event.preventDefault();
             self.tableData=angular.copy(self.tableData_ori);
-            self.modifiedData.data=[];
+            self.modifiedData.data={};
             self.editMod=false;
         };
         self.save=function($event){
@@ -48,18 +50,16 @@ app.controller("budgetCtrl",["$rootScope","$scope","$timeout","dataPreloadServic
 
             //成功回调
             self.tableData_ori=angular.copy(self.tableData);
-            self.modifiedData.data=[];
+            self.modifiedData.data={};
             self.editMod=false;
         };
 
 
 
         self.getMonthlyCount=function($index){
-            console.log($index);
             var _sum=0;
 
             $.each(self.tableData,function(i,e){
-                console.log(e)
                 var _v=e.data[$index].value;
                 _sum+=_v;
             })
@@ -68,7 +68,17 @@ app.controller("budgetCtrl",["$rootScope","$scope","$timeout","dataPreloadServic
         };
 
         self.setModified=function(item,$index){
-
+            console.log(item);
+            console.log($index);
+            var _data=self.modifiedData.data;
+            var _shopId=item.shopId;
+            if(_data[_shopId]){
+                _data[_shopId][$index]=item;
+            }else{
+                _data[_shopId]={};
+                _data[_shopId][$index]=item;
+            }
+            console.log(self.modifiedData);
         }
 
         function _init(data){

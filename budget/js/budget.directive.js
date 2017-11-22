@@ -93,7 +93,8 @@ directives.directive('menuDropdown', [
         return {
             restrict: 'A',
             scope: {
-                itemSelect:"&"
+                itemSelect:"&",
+                index:"@"
             },
             require:"ngModel",
             transclude:true,
@@ -103,7 +104,8 @@ directives.directive('menuDropdown', [
                     var item=$(this).data("item");
                     ngModelCtrl.$setViewValue(item);
                     if($scope.itemSelect){
-                        $scope.itemSelect({item:item});
+                       // $scope.itemSelect({item:item});
+                        $scope.itemSelect();
                     }
                 });
                 $scope.$on("$destroy", function() {

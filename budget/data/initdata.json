@@ -10,7 +10,7 @@
   },
   "tableData":[
     {
-      "shop":"项目1",
+      "shop":"铺位1",
       "shopId":"sp-123",
       "type":"自持",
       "form":"餐饮",
@@ -81,73 +81,73 @@
       ]
     },
     {
-      "shop":"项目2",
-      "shopId":"sp-123",
+      "shop":"铺位2",
+      "shopId":"sp-124",
       "type":"自持",
       "form":"餐饮",
       "data":[
         {
           "budgetType":"zcjm",
           "value":9999,
-          "shopId":"sp-123"
+          "shopId":"sp-124"
         },
         {
           "budgetType":"zcjm",
           "value":9999,
-          "shopId":"sp-123"
+          "shopId":"sp-124"
         },
         {
           "budgetType":"zcjm",
           "value":9999,
-          "shopId":"sp-123"
-        },
-
-        {
-          "budgetType":"zcjm",
-          "value":9999,
-          "shopId":"sp-123"
-        },
-        {
-          "budgetType":"zcjm",
-          "value":9999,
-          "shopId":"sp-123"
-        },
-        {
-          "budgetType":"zcjm",
-          "value":9999,
-          "shopId":"sp-123"
+          "shopId":"sp-124"
         },
 
         {
           "budgetType":"zcjm",
           "value":9999,
-          "shopId":"sp-123"
+          "shopId":"sp-124"
         },
         {
           "budgetType":"zcjm",
           "value":9999,
-          "shopId":"sp-123"
+          "shopId":"sp-124"
         },
         {
           "budgetType":"zcjm",
           "value":9999,
-          "shopId":"sp-123"
+          "shopId":"sp-124"
         },
 
         {
           "budgetType":"zcjm",
           "value":9999,
-          "shopId":"sp-123"
+          "shopId":"sp-124"
         },
         {
           "budgetType":"zcjm",
           "value":9999,
-          "shopId":"sp-123"
+          "shopId":"sp-124"
         },
         {
           "budgetType":"zcjm",
           "value":9999,
-          "shopId":"sp-123"
+          "shopId":"sp-124"
+        },
+
+        {
+          "budgetType":"zcjm",
+          "value":9999,
+          "shopId":"sp-124"
+        },
+        {
+          "budgetType":"zcjm",
+          "value":9999,
+          "shopId":"sp-124"
+        },
+        {
+          "budgetType":"zcjm",
+          "value":9999,
+          "shopId":"sp-124"
         }
       ]
     }

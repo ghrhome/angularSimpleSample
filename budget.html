@@ -109,9 +109,9 @@
                                             </colgroup>
                                             <tbody>
                                             <tr ng-repeat="shop in bCtrl.tableData track by $index">
-                                                <td ng-repeat="monthData in shop.data">
+                                                <td ng-repeat="monthData in shop.data track by $index">
                                                     <div class="cell-wrapper cell-edit-wrapper clearfix" ng-show="bCtrl.editMod==true">
-                                                        <div class="dropdown cell-left" menu-dropdown ng-model="monthData.budgetType" item-select="bCtrl.setBidMode(item)">
+                                                        <div class="dropdown cell-left" menu-dropdown ng-model="monthData.budgetType" item-select="bCtrl.setBidMode(monthData,$index)">
                                                             <button class="ys-text-btn dropdown-toggle" type="button" data-toggle="dropdown">
                                                                 {{bCtrl.dropdownMenu.budgetMod[monthData.budgetType]|default:"请选择"}}
                                                                 <span class="caret"></span>
@@ -123,7 +123,7 @@
                                                             </ul>
                                                         </div>
                                                         <div class="cell-right ys-input-wrapper num-input" >
-                                                            <input type="text" placeholder="/" data-date="" value="" ng-model="monthData.value" >
+                                                            <input type="text" placeholder="/" data-date="" value="" ng-model="monthData.value" ng-change="bCtrl.setModified(monthData,$index)">
                                                         </div>
                                                     </div>
                                                     <div class="cell-wrapper clearfix" ng-show="bCtrl.editMod==false">
