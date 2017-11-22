@@ -17,12 +17,12 @@ app.controller("budgetCtrl",["$rootScope","$scope","$timeout","dataPreloadServic
 
 
         //modified data;
-        self.sumData=[];
+        //self.sumData=[];
         self.tableData=[];
 
         self.modifiedData={
             project:"",
-            year:"",
+            year:"", //location.href中取
             data:[]
         }
 
@@ -39,24 +39,49 @@ app.controller("budgetCtrl",["$rootScope","$scope","$timeout","dataPreloadServic
         self.cancel=function($event){
             $event.preventDefault();
             self.tableData=angular.copy(self.tableData_ori);
+            self.modifiedData.data=[];
             self.editMod=false;
-
         };
         self.save=function($event){
             $event.preventDefault();
+            //ajax here
+
+            //成功回调
             self.tableData_ori=angular.copy(self.tableData);
+            self.modifiedData.data=[];
             self.editMod=false;
         };
 
 
+
+        self.getMonthlyCount=function($index){
+            console.log($index);
+            var _sum=0;
+
+            $.each(self.tableData,function(i,e){
+                console.log(e)
+                var _v=e.data[$index].value;
+                _sum+=_v;
+            })
+
+            return _sum;
+        };
+
+        self.setModified=function(item,$index){
+
+        }
 
         function _init(data){
             console.log(data);
 
             self.dropdownMenu.budgetMod=angular.copy(data.menuData.budgetTypes);
-            self.sumData=angular.copy(data.sum);
-            self.tableData=angular.copy(data.tableData)
-            self.tableData_ori=angular.copy(data.tableData)
+            //self.sumData=angular.copy(data.sum);
+            self.tableData=angular.copy(data.tableData);
+            self.tableData_ori=angular.copy(data.tableData);
+
+            self.modifiedData.year=data.year;
+            self.modifiedData.project=data.project;
+
             $rootScope.$broadcast("initSwiper");
 
             $("#preloader").fadeOut(300);

@@ -74,7 +74,7 @@
                                             <th ng-repeat="month in bCtrl.monthArr track by $index" class="text-center">{{month}}</th>
                                         </tr>
                                         <tr>
-                                            <td class="text-right" ng-repeat="sum in bCtrl.sumData track by $index"><span>{{sum|default:0|number:2}}</span></td>
+                                            <td class="text-right" ng-repeat="month in bCtrl.monthArr track by $index"><span>{{bCtrl.getMonthlyCount($index)|default:0|number:2}}</span></td>
                                         </tr>
                                         </thead>
                                     </table>
@@ -99,7 +99,7 @@
                         </div><!--end ys-table-static-left-->
 
                         <!--swiper-container-->
-                        <div class="swiper-container" style="width:100%;padding-bottom:50px;" >
+                        <div class="swiper-container" style="width:100%;padding-bottom:80px;" >
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <div style="width:2233px;">
