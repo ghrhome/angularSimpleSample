@@ -27,14 +27,11 @@ app.controller("budgetCtrl",["$rootScope","$scope","$timeout","dataPreloadServic
         }
 
         self.setBidMode=function(monthData,$index){
-            console.log(monthData);
-            console.log($index);
             self.setModified(monthData,$index);
         }
 
         self.edit=function($event){
             $event.preventDefault();
-            console.log("-----------")
             self.editMod=true;
         };
 
@@ -71,8 +68,6 @@ app.controller("budgetCtrl",["$rootScope","$scope","$timeout","dataPreloadServic
         };
 
         self.setModified=function(item,$index){
-            console.log(item);
-            console.log($index);
             var _data=self.modifiedData.data;
             var _shopId=item.shopId;
             if(_data[_shopId]){
@@ -81,11 +76,9 @@ app.controller("budgetCtrl",["$rootScope","$scope","$timeout","dataPreloadServic
                 _data[_shopId]={};
                 _data[_shopId][$index]=item;
             }
-            console.log(self.modifiedData);
         }
 
         function _init(data){
-            console.log(data);
 
             self.bcList=angular.copy(data.bcList);
             self.dropdownMenu.budgetMod=angular.copy(data.menuData.budgetTypes);

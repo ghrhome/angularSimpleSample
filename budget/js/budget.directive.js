@@ -46,7 +46,7 @@ directives.directive('ysLeftTopFixedTable', ["$timeout",
                     head_swiper.params.control = main_swiper;
                     main_swiper.params.control = head_swiper;
 
-                    $top.pin({
+                    pin=$top.pin({
                         containerSelector: container,
                         padding: {top: 0, bottom: 50}
                     });
@@ -59,12 +59,35 @@ directives.directive('ysLeftTopFixedTable', ["$timeout",
                     //页面事件
                     //这里暂时先禁掉 table的 tab键
                     document.onkeydown = function(){
-                        console.log(event.keyCode);
                         if(event.keyCode == 13||event.keyCode == 9) {
                             return false;
                         }
                     };
                     $(".table").find("input").attr("tabIndex","-1");
+
+                    //update by cheng
+                    var defer=null;
+                    function _swiperUpdate(){
+                        $top.width($(mainTable.parentNode).width());
+                        pin.refresh();
+                    };
+
+                    $(window).resize(function(){
+                        if(!defer){
+                            defer=setTimeout(function(){
+                                _swiperUpdate();
+                                defer=null;
+                            },200);
+                        }else{
+                            clearTimeout(defer);
+                            defer=setTimeout(function(){
+                                _swiperUpdate();
+                                defer=null;
+                            },200);
+                        }
+
+                    });
+
                 });
 
                 $scope.$on("$destroy", function() {
@@ -78,10 +101,12 @@ directives.directive('ysLeftTopFixedTable', ["$timeout",
 
                 });
 
-                //update by zhanghongen 17-11-10
-                $(window).resize(function(){
+
+
+                //update 17-11-10
+              /*  $(window).resize(function(){
                     $top.width($(mainTable.parentNode).width());
-                })
+                })*/
 
             }//end link
         };

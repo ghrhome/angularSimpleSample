@@ -72,7 +72,6 @@ app.service("dataSaveService",["$rootScope","$http",function($rootScope,$http) {
                 // location.href=$rootScope.plink;
                 alert("网络错误，请稍后再试");
                 $rootScope.loading_hide();
-                console.log(err)
             });
         }
     };
